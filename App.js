@@ -4,6 +4,9 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class DetailsScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Details',
+  };
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -14,6 +17,9 @@ class DetailsScreen extends React.Component {
 }
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -44,6 +50,16 @@ class SettingsScreen extends React.Component {
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   Details: DetailsScreen,
+},{
+  navigationOptions: {
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  },
 });
 
 const SettingsStack = createStackNavigator({
