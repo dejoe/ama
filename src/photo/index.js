@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import PhotoDetailScreen from './photodetail';
 
 class PhotoScreen extends React.Component {
   static navigationOptions = {
@@ -19,23 +20,9 @@ class PhotoScreen extends React.Component {
   }
 }
 
-//TODO: Move this into its own js file, and then import this.
-class DetailsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Photo Details',
-  };
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>This will contain photo Details!</Text>
-      </View>
-    );
-  }
-}
-
 const PhotoStack = createStackNavigator({
   Photo: PhotoScreen,
-  Details: DetailsScreen,
+  Details: PhotoDetailScreen,
 },{
   navigationOptions: {
     headerStyle: {
