@@ -2,6 +2,9 @@ import React from 'react';
 import { Text, View, FlatList, ActivityIndicator } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import PhotoDetailScreen from './photodetail';
+import { Card } from 'react-native-elements';
+import Utils from '../utils.js';
+import Config from '../config.js';
 
 /* Algorithm:
 1) Fetch from an URL using await or async. 
@@ -32,7 +35,6 @@ class PhotoScreen extends React.Component {
     })
   }
 
-
   render() {
     if(this.state.isLoading){
       return(
@@ -46,7 +48,12 @@ class PhotoScreen extends React.Component {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item}) => <Text>{item.title}</Text>}
+          renderItem={({item}) => (
+            <Card title={item.title} 
+                  image={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }}>
+              <Text>{item.caption_title}</Text>
+            </Card>
+          )}
           keyExtractor={(item, index) => index}
         />
       </View>
@@ -57,17 +64,15 @@ class PhotoScreen extends React.Component {
   async _getPhotosFromApi()  {
     try {
       let response = await fetch(
-        'http://ngd8startersite.wmg-gardens.com/rest/content/photo'
+        Config.URLSuffix+'/rest/content/photo'
       );
       let responseJson = await response.json();
       return responseJson;
     } catch (error) {
       console.error(error);
     }
-  }
-  
+  }  
 }
-
 
 const PhotoStack = createStackNavigator({
   Photo: PhotoScreen,
