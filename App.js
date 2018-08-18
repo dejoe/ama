@@ -3,11 +3,13 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SocialStack from './src/social/index';
 import PhotoStack from './src/photo/index';
+import TourStack from './src/tour/index'
 
 export default createBottomTabNavigator(
   {
     Social: SocialStack,
     Photo: PhotoStack,
+    Tour : TourStack
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -17,6 +19,9 @@ export default createBottomTabNavigator(
         if (routeName === 'Social') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'Photo') {
+          iconName = `ios-options${focused ? '' : '-outline'}`;
+        }
+       else if (routeName === 'Tour') {
           iconName = `ios-options${focused ? '' : '-outline'}`;
         }
 
