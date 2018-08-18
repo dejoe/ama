@@ -1,15 +1,14 @@
 import React from 'react';
-import { Text, View, FlatList, ActivityIndicator } from 'react-native';
+import { Text, View, Image, FlatList, ActivityIndicator } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import PhotoDetailScreen from './photodetail';
-import { Card } from 'react-native-elements';
 import Utils from '../utils.js';
 import Config from '../config.js';
 
 /* Algorithm:
 1) Fetch from an URL using await or async. 
 2) Create a state on the component. 
-3) During the component creation fetch the content and set. 
+3) During the component creation fetch the content and set on state. 
 4) Create a new method for fetch (Can be a stub that could be integrated)
 5) Map the data source to the view of the component
 */
@@ -44,15 +43,24 @@ class PhotoScreen extends React.Component {
       )
     }
 
+    //TODO: Instead of card, it would be better to use View and style it ourselves.
     return (  
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => (
-            <Card title={item.title} 
-                  image={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }}>
-              <Text>{item.caption_title}</Text>
-            </Card>
+            // <Card title={item.title} 
+            //       image={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }}>
+            //   <Text>{item.caption_title}</Text>
+            // </Card>
+              <View>
+                <Image
+                  style={{width: 345, height: 434}} 
+                  resizeMode = 'center'
+                  source={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }} 
+                />
+                <Text>{item.caption_title}</Text>
+              </View>
           )}
           keyExtractor={(item, index) => index}
         />
