@@ -3,13 +3,15 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SocialStack from './src/social/index';
 import PhotoStack from './src/photo/index';
-import TourStack from './src/tour/index'
+import TourStack from './src/tour/index';
+import MerchStack from './src/merch/index'
 
 export default createBottomTabNavigator(
   {
     Social: SocialStack,
     Photo: PhotoStack,
-    Tour : TourStack
+    Tour : TourStack,
+    Merch: MerchStack
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -19,10 +21,13 @@ export default createBottomTabNavigator(
         if (routeName === 'Social') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'Photo') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+          iconName = `ios-photos${focused ? '' : '-outline'}`;
         }
        else if (routeName === 'Tour') {
           iconName = `ios-options${focused ? '' : '-outline'}`;
+        }
+        else if (routeName === 'Merch') {
+          iconName = `ios-cart${focused ? '' : '-outline'}`;
         }
 
         // You can return any component that you like here! We usually use an
