@@ -8,15 +8,9 @@ import {
   Linking,
 } from 'react-native';
 
-import {
-  Card,
-  CardTitle,
-  CardImage,
-  CardContent,
-  CardAction,
-} from 'react-native-card-view';
 import { createStackNavigator } from 'react-navigation';
 import TourDetailScreen from './tourdetail';
+import Moment from 'moment';
 
 class TourScreen extends React.Component {
   constructor(props) {
@@ -61,47 +55,38 @@ class TourScreen extends React.Component {
         style={{
           flex: 1,
           justifyContent: 'space-between',
-          borderRadius:10 , 
-          backgroundColor: 'yellow'
+          //borderRadius: 10,
+          backgroundColor: '#6cf5f8',
         }}>
         <FlatList
           data={this.state.dataSource}
           renderItem={({ item }) => (
-            // <Text>
-            //   {item.displayName} {item.event.start.date} {item.event.start.time}{' '}
-            //   {item.event.location.city} {item.event.venue.displayName}
-            // </Text>
-            <Card>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                  padding: 10,
-                }}>
-                <View>
-                  <Text style={{width:100, alignItems: 'center' }}>
-                    {item.event.start.date}
-                  </Text>
-                </View>
-                <View style={{width:100,padding:5}}>
-                  <Text>
-                    {item.event.venue.metroArea.displayName}
-                  </Text>
-                  <Text>
-                    {item.event.venue.metroArea.country.displayName}
-                  </Text>
-                </View>
-                <View style={{width:100}}>
-                  <Button
-                    title="Ticket"
-                    dark
-                    onPress={() => Linking.openURL(item.event.uri)}
-                  />
-                </View>
+
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                padding: 10,
+              }}>
+              <View>
+                <Text style={{ width: 100, alignItems: 'center' }}>
+                  {Moment(item.event.start.date).format('MMM DD')}
+                </Text>
               </View>
-            </Card>
+              <View style={{ width: 130, padding: 5 }}>
+                <Text>{item.event.venue.metroArea.displayName}</Text>
+                <Text>{item.event.venue.metroArea.country.displayName}</Text>
+              </View>
+              <View style={{ width: 100 }}>
+                <Button
+                  title="Ticket"
+                  dark
+                  onPress={() => Linking.openURL(item.event.uri)}
+                />
+              </View>
+            </View>
           )}
           keyExtractor={(item, index) => index}
         />
