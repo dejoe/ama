@@ -55,11 +55,12 @@ class PhotoScreen extends React.Component {
             // </Card>
               <View>
                 <Image
-                  style={{width: 345, height: 434}} 
+                  style={{width: 345, height: 300}} 
                   resizeMode = 'center'
                   source={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }} 
                 />
-                <Text>{item.caption_title}</Text>
+                <Text>{item.caption_title?item.caption_title:'No Caption'}</Text>
+                
               </View>
           )}
           keyExtractor={(item, index) => index}
@@ -84,7 +85,7 @@ class PhotoScreen extends React.Component {
 
 const PhotoStack = createStackNavigator({
   Photo: PhotoScreen,
-  Details: PhotoDetailScreen,
+  Details: PhotoDetailScreen
 },{
   navigationOptions: {
     headerStyle: {
