@@ -4,11 +4,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import SocialStack from './src/social/index';
 import PhotoStack from './src/photo/index';
 import TourStack from './src/tour/index';
-import MerchStack from './src/merch/index'
+import MerchStack from './src/merch/index';
+import MusicStack from './src/music/index';
 
 export default createBottomTabNavigator(
   {
-    /**Social: SocialStack, **/
+    Social: SocialStack, 
+    Music: MusicStack,
     Photo: PhotoStack,
     Tour : TourStack,
     Merch: MerchStack
@@ -18,12 +20,14 @@ export default createBottomTabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-       /** if (routeName === 'Social') {
+      if (routeName === 'Social') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        } else **/
+        } else
 
 			if (routeName === 'Photo') {
           iconName = `ios-photos${focused ? '' : '-outline'}`;
+        }else if(routeName === 'Music'){
+          iconName = `ios-musical-notes${focused ? '' : '-outline'}`;
         }
        else if (routeName === 'Tour') {
           iconName = `ios-options${focused ? '' : '-outline'}`;
