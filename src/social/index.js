@@ -56,13 +56,14 @@ class SocialScreen extends React.Component {
             <Card>
               <View>
                   <Image
-                    style={{ width: 350, height: 250 }}
+                    style={{ width: 300, height: 250 }}
                     source={{
-                      uri: item.content.attachments[0].thumbnail_url,
+                      uri: item.content.attachments ? item.content.attachments[0].thumbnail_url:'',
                     }}
                   />
                 <View>
                     <HTML html={item.content.bodyHtml} />
+                    
                 </View>
               </View>
             </Card>
