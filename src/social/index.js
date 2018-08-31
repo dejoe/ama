@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocialIcon } from 'react-native-elements';
+import { SocialIcon, Card} from 'react-native-elements';
 import {
   Text,
   View,
@@ -9,13 +9,6 @@ import {
   Image,
   Linking,
 } from 'react-native';
-import {
-  Card,
-  CardTitle,
-  CardImage,
-  CardContent,
-  CardAction,
-} from 'react-native-card-view';
 import { createStackNavigator } from 'react-navigation';
 
 import HTML from 'react-native-render-html';
@@ -62,18 +55,14 @@ class SocialScreen extends React.Component {
           renderItem={({ item }) => (
             <Card>
               <View>
-                <CardImage>
                   <Image
                     style={{ width: 350, height: 250 }}
                     source={{
                       uri: item.content.attachments[0].thumbnail_url,
                     }}
                   />
-                </CardImage>
                 <View>
-                  <CardContent>
                     <HTML html={item.content.bodyHtml} />
-                  </CardContent>
                 </View>
               </View>
             </Card>

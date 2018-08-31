@@ -8,7 +8,7 @@ import MerchStack from './src/merch/index'
 
 export default createBottomTabNavigator(
   {
-    Social: SocialStack,
+    /**Social: SocialStack, **/
     Photo: PhotoStack,
     Tour : TourStack,
     Merch: MerchStack
@@ -18,9 +18,11 @@ export default createBottomTabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Social') {
+       /** if (routeName === 'Social') {
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Photo') {
+        } else **/
+
+			if (routeName === 'Photo') {
           iconName = `ios-photos${focused ? '' : '-outline'}`;
         }
        else if (routeName === 'Tour') {
