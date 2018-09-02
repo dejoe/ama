@@ -8,4 +8,18 @@ export default class Utils {
     }
     return decodeURIComponent(imgsrc);
   }
+  
+    static getImageSrcFromStr(str){
+
+    let regex = /<img.*?src='(.*?)'/;
+    let src = regex.exec(str)[1];
+    return src;
+  }
+  
+   static getAnchorFromStr(str){
+
+    let regex = /<a.*?href='(.*?)'/;
+    let anchor= regex.exec(str)[1];
+    return anchor;
+  }
 }

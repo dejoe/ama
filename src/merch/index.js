@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, Image, FlatList, Button,ActivityIndicator } from 'react-native';
+import { Text, View, Image, FlatList, Button,ActivityIndicator,Linking } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import Utils from '../utils.js';
 import Config from '../config.js';
+import HTML from 'react-native-render-html';
 
 /* Algorithm:
 1) Fetch from an URL using await or async. 
@@ -23,14 +24,23 @@ class MerchScreen extends React.Component {
     title: 'Merch',
   };
   
-  componentDidMount () {
-    this._getMerchFromApi().then((items) => {
-      this.setState({
-        isLoading: false,
-        dataSource: items,
-      }, function(){
+  componentDidMount() {
+    return fetch(
+      'https://staging.weate.ch.stage18.535e.blackmesh.com/mobility/merch/'
+    )
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState(
+          {
+            isLoading: false,
+            dataSource: responseJson.channel.item,
+          },
+          function() {}
+        );
       })
-    })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -52,16 +62,19 @@ class MerchScreen extends React.Component {
             //       image={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }}>
             //   <Text>{item.caption_title}</Text>
             // </Card>
-              <View>
-                <Image
-                  style={{width: 340, height: 100}} 
+              <View style={{alignItems: 'center' }}>
+                <Text style={{marginBottom:20,marginTop:20,fontWeight:'600' }}>{item.title}</Text> 
+            
+               <Image
+                  style={{width: 345, height: 300,marginBottom:20 }}
                   resizeMode = 'center'
-                  source={{ uri: item.productimageurl }} 
+                  source={{ uri: Utils.getImageSrcFromStr(item.description) }}
                 />
-                <Text>{item.productname}</Text>
-                <Button
-  title="View Details"
-/>
+                <Button style={{ width: 200, alignItems: 'center',marginTop:10 }}
+                  title="Buy Now"
+                  dark
+                  onPress={() => Linking.openURL(Utils.getAnchorFromStr(item.description))}
+                />
               </View>
           )}
           keyExtractor={(item, index) => index}
@@ -70,18 +83,7 @@ class MerchScreen extends React.Component {
     );
   }
   
-  //TODO: Move URL Path to config.js
-  async _getMerchFromApi()  {
-    try {
-      let response = await fetch(
-        'https://api.myjson.com/bins/e4dss'
-      );
-      let responseJson = await response.json();
-      return responseJson;
-    } catch (error) {
-      console.error(error);
-    }
-  }  
+ 
 }
 
 const MerchStack = createStackNavigator({
@@ -95,7 +97,7 @@ const MerchStack = createStackNavigator({
     headerTitleStyle: {
       fontWeight: 'bold',
     },
-  },
+  }, 
 });
 
 export default MerchStack;
