@@ -45,8 +45,9 @@ class PhotoScreen extends React.Component {
 
     //TODO: Instead of card, it would be better to use View and style it ourselves.
     return (  
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding:5 }}>
         <FlatList
+        numColumns={2}
           data={this.state.dataSource}
           renderItem={({item}) => (
             // <Card title={item.title} 
@@ -55,11 +56,11 @@ class PhotoScreen extends React.Component {
             // </Card>
               <View>
                 <Image
-                  style={{width: 345, height: 300}} 
+                  style={{width: 180, height:180}} 
                   resizeMode = 'center'
                   source={{ uri: Config.URLSuffix + Utils.getImageSrc(item.field_photo) }} 
                 />
-                <Text>{item.caption_title?item.caption_title:'No Caption'}</Text>
+                <Text  numberOfLines={1} style={{width: 150 , alignItems: 'center',textAlign: 'center' }}>{item.caption_title?item.caption_title:'No Caption'}</Text>
                 
               </View>
           )}
