@@ -35,8 +35,5 @@ export default ({
   <View style={styles.container}>
     <Image source={{ uri: imageUri }} style={styles.image}/>
     <Text onPress={() => Linking.openURL(link)} style={styles.title}>{title}</Text>
-  
- 
-                
   </View>
 );
